@@ -22,6 +22,11 @@ class Ship:
         self.moving_right = False
         self.moving_left = False
 
+        # shooting flag
+        self.shooting_speed = 0.005
+        self.shooting_rate = 0
+        self.is_shooting = False
+
     def blitme(self):
         """Draw the ship at its current location"""
         self.screen.blit(self.image, self.rect)
@@ -33,6 +38,10 @@ class Ship:
             self.x += self.settings.ship_speed
         if self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
+
+        # update shooting
+        if self.is_shooting:
+            self.shooting_rate += self.shooting_speed
 
         # Update rect object from self.x.
         self.rect.x = self.x
